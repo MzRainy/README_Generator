@@ -28,8 +28,8 @@ inquirer.prompt([
       },
       {
         //Installation
-        type: 'installation',
-        message: 'How can the users install your application?',
+        type: 'input',
+        message: 'How do you install your application?',
         name: 'install',
       },
       {
@@ -84,14 +84,16 @@ inquirer.prompt([
 // err ? console.error(err) : console.log('Commit logged!')
 // );
 
+    // Writing README.md File
+function writeToFile(fileName, data) {
+  return fs.writeFileSync(path.join(process.cwd(), fileName), data);
+}
 
-// TODO: Create a function to initialize app
-// function init() {
-//     inquirer.prompt(questions).then(responses) => {
-//         console.log('Creating professional README file:');
-//         writeToFile('./utils/READMEGEN.md',)
-//     }
-// }
-
-// Function call to initialize app
+// Initializing app
+function init() {
+  inquirer.prompt(questions).then((responses) => {
+    console.log("Creating Professional README.md File...");
+    writeToFile("./dist/README.md", generateMarkdown({ ...responses }));
+  });
+}
 init();
